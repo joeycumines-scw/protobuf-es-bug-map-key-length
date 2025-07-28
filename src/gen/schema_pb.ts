@@ -4,23 +4,27 @@
 
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
-import { file_google_api_field_behavior } from "./google/api/field_behavior_pb";
 import type { Message as Message$1 } from "@bufbuild/protobuf";
 
 /**
  * Describes the file schema.proto.
  */
 export const file_schema: GenFile = /*@__PURE__*/
-  fileDesc("CgxzY2hlbWEucHJvdG8SB2V4YW1wbGUiNgoHTWVzc2FnZRIrCglmaWVsZF9vbmUYASADKAsyGC5leGFtcGxlLlJlcGVhdGVkTWVzc2FnZSKXAQoPUmVwZWF0ZWRNZXNzYWdlEjkKCWZpZWxkX3R3bxgBIAMoCzImLmV4YW1wbGUuUmVwZWF0ZWRNZXNzYWdlLkZpZWxkVHdvRW50cnkSGAoLZmllbGRfdGhyZWUYAiABKAlCA+BBAxovCg1GaWVsZFR3b0VudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoDToCOAFCpAEKC2NvbS5leGFtcGxlQgtTY2hlbWFQcm90b1ABWkxnaXRodWIuY29tL2pvZXljdW1pbmVzLXNjdy9wcm90b2J1Zi1lcy1idWctbWFwLWtleS1sZW5ndGgvZ28vZXhhbXBsZTtleGFtcGxlogIDRVhYqgIHRXhhbXBsZcoCB0V4YW1wbGXiAhNFeGFtcGxlXEdQQk1ldGFkYXRh6gIHRXhhbXBsZWIGcHJvdG8z", [file_google_api_field_behavior]);
+  fileDesc("CgxzY2hlbWEucHJvdG8SB2V4YW1wbGUiegoHTWVzc2FnZRIrCgZteV9tYXAYASADKAsyGy5leGFtcGxlLk1lc3NhZ2UuTXlNYXBFbnRyeRIUCgxub3JtYWxfZmllbGQYAiABKAkaLAoKTXlNYXBFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKA06AjgBQqQBCgtjb20uZXhhbXBsZUILU2NoZW1hUHJvdG9QAVpMZ2l0aHViLmNvbS9qb2V5Y3VtaW5lcy1zY3cvcHJvdG9idWYtZXMtYnVnLW1hcC1rZXktbGVuZ3RoL2dvL2V4YW1wbGU7ZXhhbXBsZaICA0VYWKoCB0V4YW1wbGXKAgdFeGFtcGxl4gITRXhhbXBsZVxHUEJNZXRhZGF0YeoCB0V4YW1wbGViBnByb3RvMw");
 
 /**
  * @generated from message example.Message
  */
 export type Message = Message$1<"example.Message"> & {
   /**
-   * @generated from field: repeated example.RepeatedMessage field_one = 1;
+   * @generated from field: map<string, uint32> my_map = 1;
    */
-  fieldOne: RepeatedMessage[];
+  myMap: { [key: string]: number };
+
+  /**
+   * @generated from field: string normal_field = 2;
+   */
+  normalField: string;
 };
 
 /**
@@ -29,26 +33,4 @@ export type Message = Message$1<"example.Message"> & {
  */
 export const MessageSchema: GenMessage<Message> = /*@__PURE__*/
   messageDesc(file_schema, 0);
-
-/**
- * @generated from message example.RepeatedMessage
- */
-export type RepeatedMessage = Message$1<"example.RepeatedMessage"> & {
-  /**
-   * @generated from field: map<string, uint32> field_two = 1;
-   */
-  fieldTwo: { [key: string]: number };
-
-  /**
-   * @generated from field: string field_three = 2;
-   */
-  fieldThree: string;
-};
-
-/**
- * Describes the message example.RepeatedMessage.
- * Use `create(RepeatedMessageSchema)` to create a new message.
- */
-export const RepeatedMessageSchema: GenMessage<RepeatedMessage> = /*@__PURE__*/
-  messageDesc(file_schema, 1);
 

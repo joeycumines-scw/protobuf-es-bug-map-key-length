@@ -7,7 +7,6 @@
 package example
 
 import (
-	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -24,7 +23,8 @@ const (
 
 type Message struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	FieldOne      []*RepeatedMessage     `protobuf:"bytes,1,rep,name=field_one,json=fieldOne,proto3" json:"field_one,omitempty"`
+	MyMap         map[string]uint32      `protobuf:"bytes,1,rep,name=my_map,json=myMap,proto3" json:"my_map,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`
+	NormalField   string                 `protobuf:"bytes,2,opt,name=normal_field,json=normalField,proto3" json:"normal_field,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -59,61 +59,16 @@ func (*Message) Descriptor() ([]byte, []int) {
 	return file_schema_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *Message) GetFieldOne() []*RepeatedMessage {
+func (x *Message) GetMyMap() map[string]uint32 {
 	if x != nil {
-		return x.FieldOne
+		return x.MyMap
 	}
 	return nil
 }
 
-type RepeatedMessage struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	FieldTwo      map[string]uint32      `protobuf:"bytes,1,rep,name=field_two,json=fieldTwo,proto3" json:"field_two,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`
-	FieldThree    string                 `protobuf:"bytes,2,opt,name=field_three,json=fieldThree,proto3" json:"field_three,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *RepeatedMessage) Reset() {
-	*x = RepeatedMessage{}
-	mi := &file_schema_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *RepeatedMessage) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RepeatedMessage) ProtoMessage() {}
-
-func (x *RepeatedMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_schema_proto_msgTypes[1]
+func (x *Message) GetNormalField() string {
 	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RepeatedMessage.ProtoReflect.Descriptor instead.
-func (*RepeatedMessage) Descriptor() ([]byte, []int) {
-	return file_schema_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *RepeatedMessage) GetFieldTwo() map[string]uint32 {
-	if x != nil {
-		return x.FieldTwo
-	}
-	return nil
-}
-
-func (x *RepeatedMessage) GetFieldThree() string {
-	if x != nil {
-		return x.FieldThree
+		return x.NormalField
 	}
 	return ""
 }
@@ -122,14 +77,12 @@ var File_schema_proto protoreflect.FileDescriptor
 
 const file_schema_proto_rawDesc = "" +
 	"\n" +
-	"\fschema.proto\x12\aexample\x1a\x1fgoogle/api/field_behavior.proto\"@\n" +
-	"\aMessage\x125\n" +
-	"\tfield_one\x18\x01 \x03(\v2\x18.example.RepeatedMessageR\bfieldOne\"\xb9\x01\n" +
-	"\x0fRepeatedMessage\x12C\n" +
-	"\tfield_two\x18\x01 \x03(\v2&.example.RepeatedMessage.FieldTwoEntryR\bfieldTwo\x12$\n" +
-	"\vfield_three\x18\x02 \x01(\tB\x03\xe0A\x03R\n" +
-	"fieldThree\x1a;\n" +
-	"\rFieldTwoEntry\x12\x10\n" +
+	"\fschema.proto\x12\aexample\"\x9a\x01\n" +
+	"\aMessage\x122\n" +
+	"\x06my_map\x18\x01 \x03(\v2\x1b.example.Message.MyMapEntryR\x05myMap\x12!\n" +
+	"\fnormal_field\x18\x02 \x01(\tR\vnormalField\x1a8\n" +
+	"\n" +
+	"MyMapEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\rR\x05value:\x028\x01B\xa4\x01\n" +
 	"\vcom.exampleB\vSchemaProtoP\x01ZLgithub.com/joeycumines-scw/protobuf-es-bug-map-key-length/go/example;example\xa2\x02\x03EXX\xaa\x02\aExample\xca\x02\aExample\xe2\x02\x13Example\\GPBMetadata\xea\x02\aExampleb\x06proto3"
@@ -146,20 +99,18 @@ func file_schema_proto_rawDescGZIP() []byte {
 	return file_schema_proto_rawDescData
 }
 
-var file_schema_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_schema_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_schema_proto_goTypes = []any{
-	(*Message)(nil),         // 0: example.Message
-	(*RepeatedMessage)(nil), // 1: example.RepeatedMessage
-	nil,                     // 2: example.RepeatedMessage.FieldTwoEntry
+	(*Message)(nil), // 0: example.Message
+	nil,             // 1: example.Message.MyMapEntry
 }
 var file_schema_proto_depIdxs = []int32{
-	1, // 0: example.Message.field_one:type_name -> example.RepeatedMessage
-	2, // 1: example.RepeatedMessage.field_two:type_name -> example.RepeatedMessage.FieldTwoEntry
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	1, // 0: example.Message.my_map:type_name -> example.Message.MyMapEntry
+	1, // [1:1] is the sub-list for method output_type
+	1, // [1:1] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_schema_proto_init() }
@@ -173,7 +124,7 @@ func file_schema_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_schema_proto_rawDesc), len(file_schema_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
