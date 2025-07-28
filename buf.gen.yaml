@@ -1,0 +1,20 @@
+version: v2
+clean: false
+managed:
+  enabled: true
+  disable:
+    - module: buf.build/googleapis/googleapis
+      file_option: go_package_prefix
+inputs:
+  - directory: proto
+plugins:
+  - local: protoc-gen-es
+    out: src/gen
+    include_imports: true
+    opt:
+      - target=ts
+      - js_import_style=legacy_commonjs
+  - local: protoc-gen-go
+    out: go
+    opt:
+      - module=github.com/joeycumines-scw/protobuf-es-bug-map-key-length/go

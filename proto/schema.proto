@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package example;
+
+import "google/api/field_behavior.proto";
+
+option go_package = "github.com/joeycumines-scw/protobuf-es-bug-map-key-length/go/example;example";
+
+message Message {
+  repeated RepeatedMessage field_one = 1;
+}
+
+message RepeatedMessage {
+  map<string, uint32> field_two = 1;
+  string field_three = 2 [
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+}
